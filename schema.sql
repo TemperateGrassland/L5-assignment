@@ -1,5 +1,3 @@
--- //Todo remove these drop table statements - the application requires test data
-
 DROP TABLE IF EXISTS fact;
 DROP TABLE IF EXISTS factDetail;
 DROP TABLE IF EXISTS source;

@@ -16,19 +16,6 @@ def index():
         'SELECT f.id, f.left_entity, f.relation_entity, f.right_entity, user.username, user.userid, user.admin  FROM fact f JOIN user ON f.author_id = user.userid  ORDER BY id DESC'
     ).fetchall()
 
-    # print("the requests args are: ")
-    # print(request.get_data())
-
-
-    # for row in facts_and_users:
-    #
-    #     print("ID: " + str(row[0]))
-    #     print("LEFT: " + row[1])
-    #     print("RELATION: " + row[2])
-    #     print("RIGHT: " + row[3])
-    #     print("USERNAME: " + row[4])
-    #     print("USERID: " + str(row[5]))
-
     return render_template('fact/index.html', facts=facts_and_users)
 
 
@@ -73,9 +60,6 @@ def get_fact(id, check_author=True):
 
     if fact is None:
         abort(404, f"Fact id {id} doesn't exist.")
-    # todo why is the userid key missing?
-    #     if check_author and fact['userid'] != g.user['id']:
-    #         abort(403)
 
     return fact
 
@@ -84,15 +68,8 @@ def get_fact(id, check_author=True):
 @login_required
 def update(id):
     fact = get_fact(id)
-    print("fact id is: ")
-    print(fact[0])
-    print("fact left is: ")
-    print(fact[1])
-
 
     if request.method == 'POST':
-        print("the update requests args are: ")
-        print(request.get_data())
         left_entity = request.form['left_entity']
         relation = request.form['relation_entity']
         right_entity = request.form['right_entity']
@@ -112,7 +89,6 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                # TODO update query
                 'UPDATE fact SET left_entity = ?, relation_entity = ?, right_entity = ? WHERE id = ?',
                 (left_entity, relation, right_entity, id)
             )
