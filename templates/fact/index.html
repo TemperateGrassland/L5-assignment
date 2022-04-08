@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Facts{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('fact.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for fact in facts %}
+    <div class="fact">
+      <header>
+        <table class="facttable">
+          <tr>
+            <th>Left</th>
+            <th>Relation</th>
+            <th>Right</th>
+            <th>USer id</th>
+            <th>g id</th>
+          </tr>
+          <tr>
+            <td>{{ fact['left_entity'] }}</td>
+            <td>{{ fact['relation_entity'] }}</td>
+            <td>{{ fact['right_entity'] }}</td>
+            <td>{{ fact.values }}</td>
+            <td>{{ g.user['id'] }}</td>
+          </tr>
+        </table>
+        {% if g.user['id'] == fact['userid'] %}
+          <a class="action" href="{{ url_for('fact.update', id=fact['user.userid']) }}">Edit</a>
+        {% endif %}
+      </header>
+      <p class="body">This fact was added by: {{ fact['username'] }}</p>
+    </div>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

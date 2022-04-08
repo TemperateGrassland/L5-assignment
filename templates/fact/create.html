@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Fact{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="left_entity">Left Entity</label>
+    <input name="left_entity" id="left_entity" value="{{ request.form['left_entity'] }}" required>
+    <label for="relation_entity">Relation</label>
+    <input name="relation_entity" id="relation_entity" value="{{ request.form['relation_entity'] }}" required>
+    <label for="right_entity">Right Entity</label>
+    <input name="right_entity" id="right_entity" value="{{ request.form['right_entity'] }}" required>
+<!--    <label for="body">Body</label>-->
+<!--    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>-->
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

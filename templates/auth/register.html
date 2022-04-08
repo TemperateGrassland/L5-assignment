@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1 xmlns="http://www.w3.org/1999/html">{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <label for="firstname">First Name</label>
+    <input name="firstname" id="firstname" required>
+    <label for="lastname">Last Name</label>
+    <input name="lastname" id="lastname" required>
+    <input type="radio" id="html" name="fav_language" value="HTML" required>
+    <label for="html">HTML</label><br>
+    <input type="submit" value="Register">
+  </form>
+{% endblock %}
