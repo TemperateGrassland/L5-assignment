@@ -14,8 +14,22 @@
     <input name="firstname" id="firstname" required>
     <label for="lastname">Last Name</label>
     <input name="lastname" id="lastname" required>
-    <input type="radio" id="html" name="fav_language" value="HTML" required>
-    <label for="html">HTML</label><br>
+<!--    <label for="admin">Admin user?</label>-->
+    <p>Admin user?</p>
+<!--    <div>-->
+<!--      <input type="radio" id="admin-true" name="admin" value="true" checked>-->
+<!--      <label for="admin">Admin</label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <input type="radio" id="admin-false" name="admin" value="false">-->
+<!--      <label for="admin">Non-admin</label>-->
+<!--    </div>-->
+    <label for="admin">Choose a user type:</label>
+  <select id="admin" name="admin">
+    <option value="true">Admin user</option>
+    <option value="false">Non-admin user</option>
+  </select>
+<!--    <input type="radio" id="admin" name="admin" value="1" required>-->
     <input type="submit" value="Register">
   </form>
 {% endblock %}

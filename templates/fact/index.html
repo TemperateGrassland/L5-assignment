@@ -12,23 +12,18 @@
     <div class="fact">
       <header>
         <table class="facttable">
-          <tr>
+          <tr style="text-align: left;">
             <th>Left</th>
             <th>Relation</th>
             <th>Right</th>
-            <th>USer id</th>
-            <th>g id</th>
           </tr>
-          <tr>
+          <tr style="text-align: left;">
             <td>{{ fact['left_entity'] }}</td>
             <td>{{ fact['relation_entity'] }}</td>
             <td>{{ fact['right_entity'] }}</td>
-            <td>{{ fact.values }}</td>
-            <td>{{ g.user['id'] }}</td>
-          </tr>
         </table>
-        {% if g.user['id'] == fact['userid'] %}
-          <a class="action" href="{{ url_for('fact.update', id=fact['user.userid']) }}">Edit</a>
+        {% if fact['admin'] == 1 %}
+          <a class="action" href="{{ url_for('fact.update', id=fact['id']) }}">Edit</a>
         {% endif %}
       </header>
       <p class="body">This fact was added by: {{ fact['username'] }}</p>

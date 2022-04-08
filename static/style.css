@@ -135,5 +135,14 @@ input[type=submit] {
 
 .facttable {
   border: 1px solid;
-  width: 100%;
+  width: 80%;
+  text-align: center;
+}
+
+th {
+  text-align: left;
+}
+
+td {
+  align: justify;
 }

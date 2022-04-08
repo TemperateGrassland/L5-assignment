@@ -39,31 +39,12 @@ CREATE TABLE user (
     admin BOOL NOT NULL
 );
 
-INSERT INTO user (username, password, firstname, lastname) VALUES ('guest', 'password', 'admin', 'user');
-INSERT INTO user (username, password, firstname, lastname) VALUES ('admin', 'password', 'admin', 'user');
-INSERT INTO user (username, password, firstname, lastname) VALUES ('test', 'password', 'test', 'user');
+INSERT INTO user (username, password, firstname, lastname, admin) VALUES ('guestuser', 'password', 'admin', 'user', false);
+INSERT INTO user (username, password, firstname, lastname, admin) VALUES ('adminuser', 'password', 'admin', 'user', true);
+INSERT INTO user (username, password, firstname, lastname, admin) VALUES ('testuser', 'password', 'test', 'user', false);
 INSERT INTO fact (left_entity, relation_entity, right_entity, author_id) VALUES ("paris", "is the capital of", "france", 2);
 INSERT INTO fact (left_entity, relation_entity, right_entity, author_id) VALUES ("the sky", "is the colour", "blue", 2);
 INSERT INTO fact (left_entity, relation_entity, right_entity, author_id) VALUES ("orange juice", "has the molecular state of", "liquid", 2);
 INSERT INTO fact (left_entity, relation_entity, right_entity, author_id) VALUES ("the Italy mens national football team ", "came first place at", "UEFA Euro 2020", 2);
 INSERT INTO fact (left_entity, relation_entity, right_entity, author_id) VALUES ("kimchi", "is an instance of", "food", 2);
 INSERT INTO fact (left_entity, relation_entity, right_entity, author_id) VALUES ("eagle", "is an instance of", "bird", 2);
-
---
--- DROP TABLE IF EXISTS user;
--- DROP TABLE IF EXISTS post;
---
--- CREATE TABLE user (
---   id INTEGER PRIMARY KEY AUTOINCREMENT,
---   username TEXT UNIQUE NOT NULL,
---   password TEXT NOT NULL
--- );
---
--- CREATE TABLE post (
---   id INTEGER PRIMARY KEY AUTOINCREMENT,
---   author_id INTEGER NOT NULL,
---   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
---   title TEXT NOT NULL,
---   body TEXT NOT NULL,
---   FOREIGN KEY (author_id) REFERENCES user (id)
--- );

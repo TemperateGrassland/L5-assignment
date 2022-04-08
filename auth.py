@@ -17,6 +17,7 @@ def register():
         password = request.form['password']
         firstname = request.form['firstname']
         lastname = request.form['lastname']
+        is_admin_user = request.form['admin']
         db = get_db()
         error = None
 
@@ -28,13 +29,15 @@ def register():
             error = 'First name is required.'
         elif not lastname:
             error = 'Last name is required.'
+        elif not is_admin_user:
+            error = 'Admin user is required.'
 
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO user (username, password, firstname , lastname)"
-                    "VALUES (?,?,?,?)",
-                    (username, generate_password_hash(password), firstname, lastname)
+                    "INSERT INTO user (username, password, firstname , lastname, admin)"
+                    "VALUES (?,?,?,?,?)",
+                    (username, generate_password_hash(password), firstname, lastname, is_admin_user)
                 )
                 db.commit()
             except db.IntegrityError:
@@ -76,8 +79,8 @@ def login():
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
-    print("USER ID FROM SESSION IS: ")
-    print(user_id)
+    # print("USER ID FROM SESSION IS: ")
+    # print(user_id)
 
     if user_id is None:
         g.user = None
