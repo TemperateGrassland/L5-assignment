@@ -105,5 +105,6 @@ def delete(id):
     db = get_db()
     db.execute(
         'DELETE FROM fact WHERE id = ?', (id,))
+    # Todo
     db.commit()
     return redirect(url_for('fact.index'))
