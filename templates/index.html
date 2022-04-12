@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% if g.user %}
+    <a class="action" href="{{ url_for('fact.create') }}">New</a>
+    <a class="action" href="{{ url_for('fact.search') }}">Search</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div>
+    Welcome to the Fact Management App
+  </div>
+{% endblock %}

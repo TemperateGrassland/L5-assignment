@@ -2,7 +2,6 @@ import os
 
 from flask import Flask
 
-
 def create_app(test_config=None):
     # create and configure the application
     application = Flask(__name__, instance_relative_config=True)
@@ -32,6 +31,9 @@ def create_app(test_config=None):
 
     from . import fact
     application.register_blueprint(fact.bp)
+
+    from . import index
+    application.register_blueprint(index.bp)
     application.add_url_rule('/', endpoint='index')
 
     return application

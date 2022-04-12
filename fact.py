@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from factr.auth import login_required
 from factr.db import get_db
 
-bp = Blueprint('fact', __name__)
+bp = Blueprint('fact', __name__, url_prefix='/fact')
 
 
 @bp.route('/')
@@ -52,7 +52,7 @@ def create():
     return render_template('fact/create.html')
 
 
-def get_fact(id, check_author=True):
+def get_fact(id):
     fact = get_db().execute(
         'SELECT fact.id, fact.left_entity, fact.relation_entity, fact.right_entity, user.userid FROM fact JOIN user ON fact.author_id = user.userid WHERE id = ?',
         (id,)
@@ -107,3 +107,50 @@ def delete(id):
         'DELETE FROM fact WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('fact.index'))
+
+
+@bp.route('/search', methods=('POST', 'GET'))
+@login_required
+def search():
+    if request.method == 'POST':
+        left = request.form['left_entity']
+        rel = request.form['relation_entity']
+        right = request.form['right_entity']
+        error = None
+
+        if not left:
+            error = 'Left entity is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            fact = get_db().execute(
+                'SELECT fact.id, fact.left_entity, fact.relation_entity, fact.right_entity, user.userid FROM fact JOIN user ON fact.author_id = user.userid WHERE left_entity = ?',
+                (left,)
+            ).fetchone()
+            db.commit()
+            return redirect(url_for('fact.search_result'))
+
+    # fact = get_left(left)
+    return render_template('fact/search.html')
+
+
+@bp.route('/search_result', methods=('POST', 'GET'))
+@login_required
+def search_result():
+
+    return render_template('search_result.html')
+
+
+
+def get_left(left):
+    fact = get_db().execute(
+        'SELECT fact.id, fact.left_entity, fact.relation_entity, fact.right_entity, user.userid FROM fact JOIN user ON fact.author_id = user.userid WHERE left_entity = ?',
+        (left,)
+    ).fetchone()
+
+    if fact is None:
+        abort(404, f"Fact left entity {left} doesn't exist.")
+
+    return fact

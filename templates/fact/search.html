@@ -1,0 +1,18 @@
+ {% extends 'base.html' %}
+
+{% block header %}
+   <h1>{% block title %}Search Facts{% endblock %}</h1>
+
+{% endblock %}
+
+{% block content %}
+    <form method="post">>
+        <label for="left_entity">Left Entity</label>
+        <input name="left_entity" id="left_entity">
+        <label for="relation_entity">Relation</label>
+        <input name="relation_entity" id="relation_entity">
+        <label for="right_entity">Right Entity</label>
+        <input name="right_entity" id="right_entity">
+        <input type="submit" value="Search">
+    </form>
+{% endblock %}
